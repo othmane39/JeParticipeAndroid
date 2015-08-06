@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Je Participe</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_id">1635670706670333</string>
+    <string name="title_activity_data">DataActivity</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Mot de passe</string>
+    <string name="hint_name">Nom et prénom</string>
+    <string name="btn_login">Connexion</string>
+    <string name="btn_register">Inscription</string>
+    <string name="btn_link_to_register">Pas encore membre? Inscrivez-vous!</string>
+    <string name="btn_link_to_login">Vous avez déjà un compte? Connectez-vous!</string>
+    <string name="welcome">Bienvenue</string>
+    <string name="btn_logout">Se déconnecter</string>
+    <string name="name">Nom et prénom</string>
+    <string name="btn_jeParticipe">Je Participe</string>
+    <string name="btn_jeParticipe_plus">Annuler ma participation</string>
+    <string name="title_activity_event_remove">EventRemoveActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+
+</resources>
