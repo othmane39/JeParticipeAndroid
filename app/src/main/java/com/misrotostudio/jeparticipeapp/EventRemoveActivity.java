@@ -26,6 +26,8 @@ import com.misrotostudio.jeparticipeapp.helper.DataEventElement;
 import com.misrotostudio.jeparticipeapp.helper.HelperFunction;
 import com.misrotostudio.jeparticipeapp.helper.ImageDownloader;
 import com.misrotostudio.jeparticipeapp.helper.SQLiteHandler;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,6 +56,9 @@ public class EventRemoveActivity extends ActionBarActivity {
     private HashMap<String, String> user;
 
     private static final String TAG = RegisterActivity.class.getSimpleName();
+
+    private ImageLoader imageLoader;
+    private DisplayImageOptions options;
 
 
 
@@ -94,11 +99,16 @@ public class EventRemoveActivity extends ActionBarActivity {
         lieu.setText(event.getLieu());
         description.setText(event.getDescription());
 
-        try {
-            new ImageDownloader(image).execute(AppConfig.URL_IMAGE + event.getImage_url());
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        imageLoader = ImageLoader.getInstance();
+
+        options = new DisplayImageOptions.Builder().cacheInMemory(true)
+                .cacheOnDisc(true).resetViewBeforeLoading(true)
+                .showImageForEmptyUri(R.drawable.logosmall)
+                .showImageOnFail(R.drawable.logosmall)
+                .showImageOnLoading(R.drawable.logosmall).build();
+
+        imageLoader.displayImage(AppConfig.URL_IMAGE + event.getImage_url(), image, options);
+
 
         jeParticipe_btn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,7 +13,7 @@ public class AppConfig {
 
     //public static String URL_IMAGE = "http://jeparticipe.noip.me/uploads/";
 
-    public static String URL_REGISTER = "http://192.168.1.2/Admin/android_login_api/";
+    public static String URL_REGISTER = "http://192.168.1.48/Admin/android_login_api/";
 
-    public static String URL_IMAGE = "http://192.168.1.2/Admin/uploads/";
+    public static String URL_IMAGE = "http://192.168.1.48/Admin/uploads/";
 }

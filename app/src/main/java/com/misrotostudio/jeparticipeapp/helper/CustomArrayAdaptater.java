@@ -13,8 +13,12 @@ import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.misrotostudio.jeparticipeapp.R;
 import com.misrotostudio.jeparticipeapp.app.AppConfig;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +33,8 @@ public class CustomArrayAdaptater extends SimpleAdapter {
         private LayoutInflater mInflater;
         private String url_image;
         private SQLiteHandler db;
+        private ImageLoader imageLoader;
+        private DisplayImageOptions options;
 
         public CustomArrayAdaptater(Context context, List<? extends Map<String, ?>> data,
                                      int resource, String[] from, int[] to) {
@@ -38,6 +44,13 @@ public class CustomArrayAdaptater extends SimpleAdapter {
             this.from = from;
             this.to = to;
             mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            imageLoader = ImageLoader.getInstance();
+
+            options = new DisplayImageOptions.Builder().cacheInMemory(true)
+                    .cacheOnDisc(true).resetViewBeforeLoading(true)
+                    .showImageForEmptyUri(R.drawable.logosmall)
+                    .showImageOnFail(R.drawable.logosmall)
+                    .showImageOnLoading(R.drawable.logosmall).build();
         }
 
         @Override
@@ -114,7 +127,12 @@ public class CustomArrayAdaptater extends SimpleAdapter {
                             // ifs since a lot of views are TextViews (e.g. CheckBoxes).
                             setViewText((TextView) v, text);
                         } else if (v instanceof ImageView) {
-                            new ImageDownloader((ImageView) v).execute(AppConfig.URL_IMAGE + url_image);
+                            //new ImageDownloader((ImageView) v).execute(AppConfig.URL_IMAGE + url_image);
+
+                            imageLoader.displayImage(AppConfig.URL_IMAGE + url_image, (ImageView) v, options);
+
+/*
+
                             if (data instanceof Integer) {
                                 setViewImage((ImageView) v, (Integer) data);
                             } else if (data instanceof Bitmap){
@@ -122,6 +140,7 @@ public class CustomArrayAdaptater extends SimpleAdapter {
                             } else {
                                 setViewImage((ImageView) v, text);
                             }
+                            */
                         } else {
                             throw new IllegalStateException(v.getClass().getName() + " is not a " +
                                     " view that can be bounds by this SimpleAdapter");

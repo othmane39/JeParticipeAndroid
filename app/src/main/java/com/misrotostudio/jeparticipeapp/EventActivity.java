@@ -37,6 +37,8 @@ import com.misrotostudio.jeparticipeapp.helper.HelperFunction;
 import com.misrotostudio.jeparticipeapp.helper.SQLiteHandler;
 import com.misrotostudio.jeparticipeapp.helper.ImageDownloader;
 import com.misrotostudio.jeparticipeapp.helper.SessionManager;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,6 +87,9 @@ public class EventActivity extends Activity {
     private LoginManager manager;
     private ShareDialog shareDialog;
     private boolean enableShare = false;
+
+    private ImageLoader imageLoader;
+    private DisplayImageOptions options;
 
 
 
@@ -163,12 +168,23 @@ public class EventActivity extends Activity {
         lieu.setText(event.getLieu());
         description.setText(event.getDescription());
 
+
+        imageLoader = ImageLoader.getInstance();
+
+        options = new DisplayImageOptions.Builder().cacheInMemory(true)
+                .cacheOnDisc(true).resetViewBeforeLoading(true)
+                .showImageForEmptyUri(R.drawable.logosmall)
+                .showImageOnFail(R.drawable.logosmall)
+                .showImageOnLoading(R.drawable.logosmall).build();
+
+        imageLoader.displayImage(AppConfig.URL_IMAGE + event.getImage_url(), image, options);
+        /*
         try {
             new ImageDownloader(image).execute(AppConfig.URL_IMAGE + event.getImage_url());
         }catch(Exception e){
             e.printStackTrace();
         }
-
+*/
                 jeParticipe_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -43,4 +43,5 @@ dependencies {
     //     transitive = true;
     // }
     compile files('libs/volley.jar')
+    compile files('libs/universal-image-loader-1.9.4.jar')
 }
