@@ -116,7 +116,7 @@ public class EventRemoveActivity extends ActionBarActivity {
                 pDialog.setMessage("Veuillez patienter ...");
                 showDialog();
                 removeParticipe(event, user);
-
+                hideDialog();
                 finish();
 
             }
@@ -135,14 +135,15 @@ public class EventRemoveActivity extends ActionBarActivity {
             public void onResponse(String response) {
                 Log.d(TAG, ": " + response.toString());
 
-                hideDialog();
+
 
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
                         db.deleteDataParticipe(event.getNom(), event.getDateD());
-                        db.addDataEvent(event.getNom(), event.getType(), event.getDateD(), event.getHeureD(), event.getDateF(), event.getHeureF(), event.getLieu(), event.getDescription(), event.getImage_url());
+                        db.addDataEvent(event.getNom(), event.getType(), event.getDateD(), event.getHeureD(), event.getDateF(),
+                                event.getHeureF(), event.getLieu(), event.getDescription(), event.getImage_url(), event.getEvent_url(), event.getBuy_url());
 
                         String errorMsg = event.getNom() + "a été supprimé de vos évenements";
                         Toast.makeText(getApplicationContext(),

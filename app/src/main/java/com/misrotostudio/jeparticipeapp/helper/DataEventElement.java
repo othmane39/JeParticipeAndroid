@@ -22,6 +22,8 @@ public class DataEventElement implements Parcelable {
     private String lieu;
     private String description;
     private String image_url;
+    private String event_url;
+    private String buy_url;
 
     public DataEventElement(){
 
@@ -37,6 +39,9 @@ public class DataEventElement implements Parcelable {
         lieu = (String) ev.get("lieu");
         description = (String) ev.get("description");
         image_url = (String) ev.get("image_url");
+
+        event_url = (String) ev.get("event_url");
+        buy_url = (String) ev.get("buy_url");
 
         Log.d("DataEventElement: ", "object created with success");
     }
@@ -65,6 +70,9 @@ public class DataEventElement implements Parcelable {
         dest.writeString(lieu);
         dest.writeString(description);
         dest.writeString(image_url);
+
+        dest.writeString(event_url);
+        dest.writeString(buy_url);
     }
 
     private void readFromParcel(Parcel in) {
@@ -81,6 +89,9 @@ public class DataEventElement implements Parcelable {
         lieu = in.readString();
         description = in.readString();
         image_url = in.readString();
+
+        event_url = in.readString();
+        buy_url = in.readString();
 
     }
 
@@ -132,8 +143,16 @@ public class DataEventElement implements Parcelable {
         return type;
     }
 
+    public String getEvent_url(){
+        return event_url;
+    }
+
+    public String getBuy_url() {
+        return buy_url;
+    }
+
     @Override
     public String toString() {
-        return nom +" " +type +" " + dateD +" " + dateF +" " + heureD +" " + heureF +" " + lieu +" " + description +" " + image_url;
+        return nom +" " +type +" " + dateD +" " + dateF +" " + heureD +" " + heureF +" " + lieu +" " + description +" " + image_url + " " + event_url + "" + buy_url;
     }
 }

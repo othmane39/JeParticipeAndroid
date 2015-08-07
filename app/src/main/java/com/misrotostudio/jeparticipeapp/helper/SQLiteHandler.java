@@ -29,7 +29,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     // Database Name
     private static final String DATABASE_NAME = "android_api";
@@ -58,7 +58,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String KEY_HEURE_F = "heure_fin";
     private static final String KEY_LIEU = "lieu";
     private static final String KEY_DESCRIPTION = "description";
-    private static final String KEY_IMAGE = "image";
+    private static final String KEY_IMAGE_URL = "image_url";
+    private static final String KEY_EVENT_URL = "event_url";
+    private static final String KEY_BUY_URL = "buy_url";
 
 
     public SQLiteHandler(Context context) {
@@ -78,14 +80,16 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " VARCHAR(255) NOT NULL,"
                 + KEY_TYPE + " VARCHAR(255) NOT NULL, " + KEY_DATE_D + " VARCHAR(255) NOT NULL,"
                 + KEY_HEURE_D + " VARCHAR(255) NOT NULL," + KEY_DATE_F + " VARCHAR(255) DEFAULT NULL," + KEY_HEURE_F + " VARCHAR(255) DEFAULT NULL,"
-                + KEY_LIEU + " VARCHAR(255) NOT NULL," + KEY_DESCRIPTION + " TEXT NOT NULL," + KEY_IMAGE + " VARCHAR(255)" + ")";// + " DEFAULT CHARSET=utf8";
+                + KEY_LIEU + " VARCHAR(255) NOT NULL," + KEY_DESCRIPTION + " TEXT NOT NULL," + KEY_IMAGE_URL + " VARCHAR(255)," + KEY_EVENT_URL +" VARCHAR(255),"+
+                KEY_BUY_URL + " VARCHER(255)" + ")";// + " DEFAULT CHARSET=utf8";
         db.execSQL(CREATE_EVENT_TABLE);
 
         String CREATE_PARTICIPE_TABLE = "CREATE TABLE " + TABLE_PARTICIPE + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " VARCHAR(255) NOT NULL,"
                 + KEY_TYPE + " VARCHAR(255) NOT NULL, " + KEY_DATE_D + " VARCHAR(255) NOT NULL,"
                 + KEY_HEURE_D + " VARCHAR(255) NOT NULL," + KEY_DATE_F + " VARCHAR(255) DEFAULT NULL," + KEY_HEURE_F + " VARCHAR(255) DEFAULT NULL,"
-                + KEY_LIEU + " VARCHAR(255) NOT NULL," + KEY_DESCRIPTION + " VARCHAR(255) NOT NULL," + KEY_IMAGE + " VARCHAR(255)" + ")";// + " DEFAULT CHARSET=utf8";
+                + KEY_LIEU + " VARCHAR(255) NOT NULL," + KEY_DESCRIPTION + " VARCHAR(255) NOT NULL," + KEY_IMAGE_URL + " VARCHAR(255)," + KEY_EVENT_URL +" VARCHAR(255),"+
+                KEY_BUY_URL + " VARCHER(255)" + ")";// + " DEFAULT CHARSET=utf8";
         db.execSQL(CREATE_PARTICIPE_TABLE);
 
         Log.d(TAG, "Database tables created");
@@ -125,7 +129,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     }
 
     public void addDataEvent(String name, String type, String date_d, String heure_d,
-                         String date_f, String heure_f, String lieu, String description, String image){
+                         String date_f, String heure_f, String lieu, String description, String image, String event_url, String buy_url){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -137,7 +141,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_HEURE_F, heure_f);
         values.put(KEY_LIEU, lieu);
         values.put(KEY_DESCRIPTION, description);
-        values.put(KEY_IMAGE, image);
+        values.put(KEY_IMAGE_URL, image);
+        values.put(KEY_EVENT_URL, event_url);
+        values.put(KEY_BUY_URL, buy_url);
 
         //Insert Row
         long ir = db.insert(TABLE_EVENT, null, values);
@@ -148,7 +154,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     }
 
     public void addDataParticipe(String name, String type, String date_d, String heure_d,
-                             String date_f, String heure_f, String lieu, String description, String image){
+                             String date_f, String heure_f, String lieu, String description, String image, String event_url, String buy_url){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -160,7 +166,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_HEURE_F, heure_f);
         values.put(KEY_LIEU, lieu);
         values.put(KEY_DESCRIPTION, description);
-        values.put(KEY_IMAGE, image);
+        values.put(KEY_IMAGE_URL, image);
+        values.put(KEY_EVENT_URL, event_url);
+        values.put(KEY_BUY_URL, buy_url);
 
         //Insert Row
         long ir = db.insert(TABLE_PARTICIPE, null, values);
@@ -195,7 +203,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return user;
     }
 
-    public ArrayList<HashMap<String, ?>> getDataEventDetails(int i) {
+    public ArrayList<HashMap<String, ?>> getDataEventDetails() {
 
         ArrayList<HashMap<String, ?>> eventList = new ArrayList<HashMap<String, ?>>();
         String selectQuery = "SELECT * FROM " + TABLE_EVENT;
@@ -215,29 +223,11 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 event.put(KEY_HEURE_F, (String) cursor.getString(6));
                 event.put(KEY_LIEU, (String) cursor.getString(7));
                 event.put(KEY_DESCRIPTION, cursor.getString(8));
-                if (i == 2){
-                    Bitmap b = null;
-                    /*
-                    try {
-                       new ImageDownloader(v).execute(AppConfig.URL_IMAGE + cursor.getString(9));
-                    }catch(NullPointerException e){
-                        e.printStackTrace();
-                        Log.e("TAAAAAAAAAAAAA", "Failed to othmane spki");
-                    }
-                    */
-                    try {
-                        event.put(KEY_IMAGE, (Bitmap) b);
-                        event.put("image_url", (String) cursor.getString(9));
-                    }catch (NullPointerException e){
-                        e.printStackTrace();
-                        Log.e("MAAAAAAAAAAAA", "Failed to put othmane");
-                    }
-                }
-                else{
-                    event.put(KEY_IMAGE, (String) cursor.getString(9));
-                }
+                event.put(KEY_IMAGE_URL, (String) cursor.getString(9));
+                event.put(KEY_EVENT_URL, (String) cursor.getString(10));
+                event.put(KEY_BUY_URL, (String) cursor.getString(11));
                 eventList.add(event);
-                //Log.d("Event Element", event.toString());
+                Log.d("Event Element", event.toString());
             }while (cursor.moveToNext());
         }
         cursor.close();
@@ -249,7 +239,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<HashMap<String, ?>> getDataParticipeDetails(int i) {
+    public ArrayList<HashMap<String, ?>> getDataParticipeDetails() {
 
         ArrayList<HashMap<String, ?>> eventList = new ArrayList<HashMap<String, ?>>();
         String selectQuery = "SELECT * FROM " + TABLE_PARTICIPE;
@@ -260,37 +250,18 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
             do {
-            HashMap<String, Object> event = new HashMap<String, Object>();
-            event.put(KEY_NAME, cursor.getString(1));
-            event.put(KEY_TYPE, cursor.getString(2));
-            event.put(KEY_DATE_D, cursor.getString(3));
-            event.put(KEY_HEURE_D, cursor.getString(4));
-            event.put(KEY_DATE_F, cursor.getString(5));
-            event.put(KEY_HEURE_F, cursor.getString(6));
-            event.put(KEY_LIEU, cursor.getString(7));
-            event.put(KEY_DESCRIPTION, cursor.getString(8));
-                if (i == 2){
-                    Bitmap b = null;
-                    /*
-                    try {
-                       new ImageDownloader(v).execute(AppConfig.URL_IMAGE + cursor.getString(9));
-                    }catch(NullPointerException e){
-                        e.printStackTrace();
-                        Log.e("TAAAAAAAAAAAAA", "Failed to othmane spki");
-                    }
-                    */
-                    try {
-                        event.put(KEY_IMAGE, (Bitmap) b);
-                        event.put("image_url", (String) cursor.getString(9));
-                    }catch (NullPointerException e){
-                        e.printStackTrace();
-                        Log.e("MAAAAAAAAAAAA", "Failed to put othmane");
-                    }
-                }
-                else{
-                    event.put(KEY_IMAGE, (String) cursor.getString(9));
-                }
-            eventList.add(event);
+                HashMap<String, Object> event = new HashMap<String, Object>();
+                event.put(KEY_NAME, cursor.getString(1));
+                event.put(KEY_TYPE, cursor.getString(2));
+                event.put(KEY_DATE_D, cursor.getString(3));
+                event.put(KEY_HEURE_D, cursor.getString(4));
+                event.put(KEY_DATE_F, cursor.getString(5));
+                event.put(KEY_HEURE_F, cursor.getString(6));
+                event.put(KEY_LIEU, cursor.getString(7));
+                event.put(KEY_DESCRIPTION, cursor.getString(8));
+                event.put(KEY_IMAGE_URL, (String) cursor.getString(9));
+
+                eventList.add(event);
             }while (cursor.moveToNext());
         }
         cursor.close();

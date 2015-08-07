@@ -316,14 +316,16 @@ public class MainActivity extends Activity {
                             event = coming_events.getJSONObject(i);
                             Log.d("ObjEvent", event.toString());
                             db.addDataEvent(event.getString("nom"), event.getString("type"), event.getString("date_debut"), event.getString("heure_debut"),
-                                    event.getString("date_fin"), event.getString("heure_fin"), event.getString("lieu"), event.getString("description"), event.getString("image"));
+                                    event.getString("date_fin"), event.getString("heure_fin"), event.getString("lieu"), event.getString("description"),
+                                    event.getString("image"), event.getString("event_url"), event.getString("buy_url"));
                         }
 
                         for(int i=0; i<my_event.length(); i++){
                             event = my_event.getJSONObject(i);
                             Log.d("ObjParticipe", event.toString());
                             db.addDataParticipe(event.getString("nom"), event.getString("type"), event.getString("date_debut"), event.getString("heure_debut"),
-                                    event.getString("date_fin"), event.getString("heure_fin"), event.getString("lieu"), event.getString("description"), event.getString("image"));
+                                    event.getString("date_fin"), event.getString("heure_fin"), event.getString("lieu"), event.getString("description"),
+                                    event.getString("image"), event.getString("event_url"), event.getString("buy_url"));
                         }
 
                         showList();
@@ -372,8 +374,8 @@ public class MainActivity extends Activity {
 
 
     protected void showList(){
-        eventList = db.getDataEventDetails(2);
-        participeList = db.getDataParticipeDetails(2);
+        eventList = db.getDataEventDetails();
+        participeList = db.getDataParticipeDetails();
 
         ListAdapter adapter ;
 

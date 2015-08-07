@@ -100,7 +100,6 @@ public class CustomArrayAdaptater extends SimpleAdapter {
                     if (text == null) {
                         text = "";
                     }
-                    Log.d("DATA TEST", text);
 
                     Log.d("DATA TEST IMAGE", url_image);
 

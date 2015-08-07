@@ -109,39 +109,7 @@ public class EventActivity extends Activity {
 
         session = new SessionManager(getApplicationContext());
 
-/*
-        if (session.isFacebookLoggedIn()) {
-            FacebookSdk.sdkInitialize(getApplicationContext());
 
-            callbackManager = CallbackManager.Factory.create();
-
-            List<String> permissionNeeds = Arrays.asList("publish_actions");
-            //try{
-            manager = LoginManager.getInstance();
-
-            manager.logInWithPublishPermissions(this, permissionNeeds);
-
-            manager.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                @Override
-                public void onSuccess(LoginResult loginResult) {
-
-                    enableShare = true;
-                    Log.d("Facebook", "Sharing Success");
-                }
-
-                @Override
-                public void onCancel() {
-                    Log.d("Facebook", "Sharing Cancel");
-                }
-
-                @Override
-                public void onError(FacebookException exception) {
-                    Log.d("Facebook", "Sharing Error onError");
-                }
-            });
-        }
-
-*/
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
 
@@ -191,9 +159,9 @@ public class EventActivity extends Activity {
                         pDialog.setMessage("Enregistrement ...");
                         showDialog();
                         participe(event, user);
-
-                        if (session.isFacebookLoggedIn())
-                            publishImage("Je Participe à " + event.getNom(), event.getDescription(), "www.crescendo.ma");
+                        hideDialog();
+                        if (session.isFacebookLoggedIn() && !event.getEvent_url().isEmpty())
+                            publishImage("Je Participe à " + event.getNom(), event.getDescription(), event.getEvent_url());
 
                         finish();
 
@@ -250,14 +218,15 @@ public class EventActivity extends Activity {
             public void onResponse(String response) {
                 Log.d(TAG, ": " + response.toString());
 
-                hideDialog();
+
 
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
                         db.deleteDataEvent(event.getNom(), event.getDateD());
-                        db.addDataParticipe(event.getNom(), event.getType(), event.getDateD(), event.getHeureD(), event.getDateF(), event.getHeureF(), event.getLieu(), event.getDescription(), event.getImage_url());
+                        db.addDataParticipe(event.getNom(), event.getType(), event.getDateD(), event.getHeureD(), event.getDateF(),
+                                event.getHeureF(), event.getLieu(), event.getDescription(), event.getImage_url(), event.getEvent_url(), event.getBuy_url());
 
                         String errorMsg = event.getNom() + "a été ajouté a vos évenements";
                         Toast.makeText(getApplicationContext(),
