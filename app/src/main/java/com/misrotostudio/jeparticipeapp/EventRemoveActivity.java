@@ -69,7 +69,7 @@ public class EventRemoveActivity extends ActionBarActivity {
 
         Bundle b = getIntent().getExtras();
         event = b.getParcelable("eventS");
-        Log.d("Parcelable: ", event.toString());
+        //Log.d("Parcelable: ", event.toString());
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -133,7 +133,7 @@ public class EventRemoveActivity extends ActionBarActivity {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, ": " + response.toString());
+                //Log.d(TAG, ": " + response.toString());
 
 
 

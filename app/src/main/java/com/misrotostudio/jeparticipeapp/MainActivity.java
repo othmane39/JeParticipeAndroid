@@ -167,7 +167,7 @@ public class MainActivity extends Activity {
                 Intent intent = new Intent(MainActivity.this, EventActivity.class);
                 intent.putExtra("eventS", ev);
                 startActivity(intent);
-                Log.d("TAG", ev.toString());
+                //Log.d("TAG", ev.toString());
             }
         });
 
@@ -182,14 +182,13 @@ public class MainActivity extends Activity {
                 Intent intent = new Intent(MainActivity.this, EventRemoveActivity.class);
                 intent.putExtra("eventS", ev);
                 startActivity(intent);
-                Log.d("TAG", ev.toString());
+                //Log.d("TAG", ev.toString());
             }
         });
 
 
         showList();
 
-        Log.d("HHHHHHHHHHHH", "on create");
 
 
     }
@@ -215,7 +214,7 @@ public class MainActivity extends Activity {
 
         getEvents(uid);
 
-        Log.d("HHHHHHHHHHHH", "on resume");
+
 
         listEv = (ListView) findViewById(R.id.listViewComingEvent);
         listPa = (ListView) findViewById(R.id.listViewParticipeEvent);
@@ -240,7 +239,7 @@ public class MainActivity extends Activity {
                 intent.putExtra("eventS", ev);
                 startActivity(intent);
 
-                Log.d("TAG", ev.toString());
+                //Log.d("TAG", ev.toString());
             }
         });
 /*
@@ -292,7 +291,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Event Response: " + response.toString());
+                //Log.d(TAG, "Event Response: " + response.toString());
 
 
                 try {
@@ -307,14 +306,14 @@ public class MainActivity extends Activity {
                         JSONArray coming_events = jObj.getJSONArray("coming_event");
                         JSONArray my_event = jObj.getJSONArray("my_event");
 
-                        Log.d("Othmane :", coming_events.toString());
-                        Log.d("MY EVENTS :", my_event.toString());
+                        //Log.d("Othmane :", coming_events.toString());
+                        //Log.d("MY EVENTS :", my_event.toString());
 
 
                         JSONObject event;
                         for(int i=0; i<coming_events.length(); i++){
                             event = coming_events.getJSONObject(i);
-                            Log.d("ObjEvent", event.toString());
+                            //Log.d("ObjEvent", event.toString());
                             db.addDataEvent(event.getString("nom"), event.getString("type"), event.getString("date_debut"), event.getString("heure_debut"),
                                     event.getString("date_fin"), event.getString("heure_fin"), event.getString("lieu"), event.getString("description"),
                                     event.getString("image"), event.getString("event_url"), event.getString("buy_url"));
@@ -322,7 +321,7 @@ public class MainActivity extends Activity {
 
                         for(int i=0; i<my_event.length(); i++){
                             event = my_event.getJSONObject(i);
-                            Log.d("ObjParticipe", event.toString());
+                            //Log.d("ObjParticipe", event.toString());
                             db.addDataParticipe(event.getString("nom"), event.getString("type"), event.getString("date_debut"), event.getString("heure_debut"),
                                     event.getString("date_fin"), event.getString("heure_fin"), event.getString("lieu"), event.getString("description"),
                                     event.getString("image"), event.getString("event_url"), event.getString("buy_url"));

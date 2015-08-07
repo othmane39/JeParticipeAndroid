@@ -101,7 +101,7 @@ public class EventActivity extends Activity {
 
         Bundle b = getIntent().getExtras();
         event = b.getParcelable("eventS");
-        Log.d("Parcelable: ", event.toString());
+        //Log.d("Parcelable: ", event.toString());
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -216,7 +216,7 @@ public class EventActivity extends Activity {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, ": " + response.toString());
+                //Log.d(TAG, ": " + response.toString());
 
 
 

@@ -101,7 +101,7 @@ public class CustomArrayAdaptater extends SimpleAdapter {
                         text = "";
                     }
 
-                    Log.d("DATA TEST IMAGE", url_image);
+                    //Log.d("DATA TEST IMAGE", url_image);
 
                     boolean bound = false;
                     if (binder != null) {

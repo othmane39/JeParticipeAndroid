@@ -198,7 +198,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         // return user
-        Log.d(TAG, "Fetching user from Sqlite: " + user.toString());
+        //Log.d(TAG, "Fetching user from Sqlite: " + user.toString());
 
         return user;
     }
@@ -227,7 +227,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 event.put(KEY_EVENT_URL, (String) cursor.getString(10));
                 event.put(KEY_BUY_URL, (String) cursor.getString(11));
                 eventList.add(event);
-                Log.d("Event Element", event.toString());
+                //Log.d("Event Element", event.toString());
             }while (cursor.moveToNext());
         }
         cursor.close();
@@ -332,11 +332,14 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     public void deleteDataEvent(String name, String dateD){
         SQLiteDatabase db = this.getWritableDatabase();
-
-        db.delete(TABLE_EVENT, KEY_NAME + " = '" + name + "' AND " + KEY_DATE_D + "= '" + dateD + "'", null);
+        db.delete(TABLE_EVENT, KEY_NAME + " = '" + name + "' AND " + KEY_DATE_D + " = '" + dateD + "'", null);
+/*
+        db.delete(TABLE_EVENT, KEY_DATE_D + "= '" + dateD + "' AND " + KEY_DATE_F + "= '" + dateF + "' AND " +
+                KEY_HEURE_D + " = '" + heureD + "' AND " + KEY_HEURE_F + "= '" + heureF + "' AND " + KEY_LIEU + " = '" + lieu +"'", null);
+                */
         db.close();
 
-        Log.d(TAG, "Event " + name + " deleted from sqlite event table");
+        Log.d(TAG, "Event "  + " deleted from sqlite event table");
     }
 
     public void deleteDataParticipe() {
@@ -351,10 +354,14 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public void deleteDataParticipe(String name, String dateD){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.delete(TABLE_PARTICIPE, KEY_NAME + "= '" + name + "' AND " + KEY_DATE_D + "= '" + dateD + "'", null);
+        db.delete(TABLE_EVENT, KEY_NAME + " = '" + name + "' AND " + KEY_DATE_D + " = '" + dateD + "'", null);
+/*
+        db.delete(TABLE_PARTICIPE, KEY_DATE_D + "= '" + dateD + "' AND " + KEY_DATE_F + "= '" + dateF + "' AND " +
+                KEY_HEURE_D + " = '" + heureD + "' AND " + KEY_HEURE_F + "= '" + heureF + "' AND " + KEY_LIEU + " = '" + lieu +"'" , null);
+                */
         db.close();
 
-        Log.d(TAG, "Event " + name + " deleted from sqlite participe table");
+        Log.d(TAG, "Event "  + " deleted from sqlite participe table");
     }
 
 }
