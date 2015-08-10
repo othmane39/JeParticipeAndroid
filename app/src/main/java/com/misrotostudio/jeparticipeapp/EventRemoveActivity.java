@@ -103,9 +103,9 @@ public class EventRemoveActivity extends ActionBarActivity {
 
         options = new DisplayImageOptions.Builder().cacheInMemory(true)
                 .cacheOnDisc(true).resetViewBeforeLoading(true)
-                .showImageForEmptyUri(R.drawable.logosmall)
-                .showImageOnFail(R.drawable.logosmall)
-                .showImageOnLoading(R.drawable.logosmall).build();
+                .showImageForEmptyUri(null)
+                .showImageOnFail(null)
+                .showImageOnLoading(null).build();
 
         imageLoader.displayImage(AppConfig.URL_IMAGE + event.getImage_url(), image, options);
 

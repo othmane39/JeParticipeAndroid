@@ -48,9 +48,9 @@ public class CustomArrayAdaptater extends SimpleAdapter {
 
             options = new DisplayImageOptions.Builder().cacheInMemory(true)
                     .cacheOnDisc(true).resetViewBeforeLoading(true)
-                    .showImageForEmptyUri(R.drawable.logosmall)
-                    .showImageOnFail(R.drawable.logosmall)
-                    .showImageOnLoading(R.drawable.logosmall).build();
+                    .showImageForEmptyUri(null)
+                    .showImageOnFail(null)
+                    .showImageOnLoading(null).build();
         }
 
         @Override
