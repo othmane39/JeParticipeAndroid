@@ -18,5 +18,6 @@
     <string name="title_activity_event_remove">EventRemoveActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_test">TestActivity</string>
 
 </resources>

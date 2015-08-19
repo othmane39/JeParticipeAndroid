@@ -127,11 +127,13 @@ public class CustomArrayAdaptater extends SimpleAdapter {
                             setViewText((TextView) v, text);
                         } else if (v instanceof ImageView) {
                             //new ImageDownloader((ImageView) v).execute(AppConfig.URL_IMAGE + url_image);
-
+                            //((ImageView) v).setAdjustViewBounds(true);
+                            //((ImageView) v).setMaxHeight(100);
+                            //((ImageView) v).setMaxWidth(100);
+                            //((ImageView) v).setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                             imageLoader.displayImage(AppConfig.URL_IMAGE + url_image, (ImageView) v, options);
 
 /*
-
                             if (data instanceof Integer) {
                                 setViewImage((ImageView) v, (Integer) data);
                             } else if (data instanceof Bitmap){
@@ -139,7 +141,7 @@ public class CustomArrayAdaptater extends SimpleAdapter {
                             } else {
                                 setViewImage((ImageView) v, text);
                             }
-                            */
+*/
                         } else {
                             throw new IllegalStateException(v.getClass().getName() + " is not a " +
                                     " view that can be bounds by this SimpleAdapter");

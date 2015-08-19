@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
     private CallbackManager callbackManager;
     private LoginManager manager;
 
-    private static final String TAG = RegisterActivity.class.getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -411,6 +411,7 @@ public class MainActivity extends Activity {
 
         ViewGroup.LayoutParams par = listView.getLayoutParams();
         par.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1));
+        Log.d("Missa", "NotFrag " + par.height);
         listView.setLayoutParams(par);
         listView.requestLayout();
     }

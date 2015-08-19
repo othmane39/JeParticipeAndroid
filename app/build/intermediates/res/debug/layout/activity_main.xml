@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -85,6 +86,8 @@
             <ListView
                 android:layout_width="fill_parent"
                 android:layout_height="65dp"
+                android:divider="@null"
+                android:dividerHeight="0dp"
                 android:id="@+id/listViewParticipeEvent" />
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
@@ -120,7 +123,10 @@
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="118dp"
-                android:id="@+id/listViewComingEvent" />
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:id="@+id/listViewComingEvent"
+                />
 
             <Button
                 android:id="@+id/btnLogout"

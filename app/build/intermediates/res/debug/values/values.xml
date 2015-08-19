@@ -274,6 +274,7 @@
     <string name="name">Nom et prénom</string>
     <string name="title_activity_data">DataActivity</string>
     <string name="title_activity_event_remove">EventRemoveActivity</string>
+    <string name="title_activity_test">TestActivity</string>
     <string name="welcome">Bienvenue</string>
     <!-- From: file:/Users/othmaneelmassari/AndroidStudioProjects/JeParticipeApp/app/src/main/res/values/styles.xml -->
     <eat-comment/>

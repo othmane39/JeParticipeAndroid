@@ -289,7 +289,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     }
 
     public int getEventRowCount(){
-        String countQuery = "SELECT  * FROM" + TABLE_EVENT;
+        String countQuery = "SELECT  * FROM " + TABLE_EVENT;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int rowCount = cursor.getCount();

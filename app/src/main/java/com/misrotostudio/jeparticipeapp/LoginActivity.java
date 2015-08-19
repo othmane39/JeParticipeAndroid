@@ -46,6 +46,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import junit.framework.Test;
+
 
 public class LoginActivity extends Activity {
     // LogCat tag
@@ -103,7 +105,7 @@ public class LoginActivity extends Activity {
         // Check if user is already logged in or not
         if (session.isLoggedIn() && !(db.getUserDetails().isEmpty()) ) {
             // User is already logged in. Take him to main activity
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);////////
             startActivity(intent);
             finish();
         }
@@ -234,7 +236,7 @@ public class LoginActivity extends Activity {
                         
                         // Launch main activity
                         Intent intent = new Intent(LoginActivity.this,
-                                MainActivity.class);
+                                TestActivity.class);
                         startActivity(intent);
                         finish();
                     }
